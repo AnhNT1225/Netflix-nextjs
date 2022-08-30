@@ -7,11 +7,24 @@ import { Movie } from '../typings'
 import requests from '../utils/requests'
 
 interface Props {
-  netflixOriginals: Movie[];
+  netflixOriginals: Movie[]
+  trendingNow: Movie[]
+  topRated: Movie[]
+  actionMovies: Movie[]
+  comedyMovies: Movie[]
+  horrorMovies: Movie[]
+  romanceMovies: Movie[]
+  documentaries: Movie[]
 }
 
-
-const Home = ({netflixOriginals} : Props) => {
+const Home = ({netflixOriginals,
+  actionMovies,
+  comedyMovies,
+  documentaries,
+  horrorMovies,
+  romanceMovies,
+  topRated,
+  trendingNow} : Props) => {
   return (
     <div className='reative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]'>
       <Head>
@@ -20,7 +33,7 @@ const Home = ({netflixOriginals} : Props) => {
       </Head>
       <Header/>
       <main>
-        <Banner />
+        <Banner netflixOriginals={netflixOriginals}/>
         <section>
           {/* Row */}
         </section>
@@ -57,14 +70,14 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      netflixOriginals: netflixOriginals.results,
-      trendingNow: trendingNow.results,
-      topRated: topRated.results,
-      actionMovies: actionMovies.results,
-      comedyMovies: comedyMovies.results,
-      horrorMovies: horrorMovies.results,
-      romanceMovies: romanceMovies.results,
-      documentaries: documentaries.results
+      netflixOriginals: netflixOriginals.results ?? null,
+      trendingNow: trendingNow.results ?? null,
+      topRated: topRated.results ?? null,
+      actionMovies: actionMovies.results ?? null,
+      comedyMovies: comedyMovies.results ?? null,
+      horrorMovies: horrorMovies.results ?? null,
+      romanceMovies: romanceMovies.results ?? null,
+      documentaries: documentaries.results ?? null
     },
   }
 }
